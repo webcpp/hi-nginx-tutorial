@@ -9,7 +9,7 @@
 它支持哪些编程语言？它们是：
 
 - C++
-- java
+- java,javascript,jsr233 JVM language
 - lua
 - python
 - php
