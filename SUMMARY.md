@@ -1,6 +1,6 @@
 # Summary
 
-* [简介](README.md)
+* [hi-nginx 使用说明](README.md)
 * [安装](00/000.md)
 * [使用](00/001.md)
     * [配置命令](00/0001.md)
