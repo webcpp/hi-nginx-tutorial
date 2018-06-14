@@ -26,3 +26,6 @@
 总之，hi-nginx是nginx的超集，它继承了nginx的优良血统，是能够支持超大并发量的应用服务器。
 
 
+[help.hi-nginx.com](https://help.hi-nginx.com/) gitbook.
+
+[doc.hi-nginx.com](https://doc.hi-nginx.com/) gitbook.
