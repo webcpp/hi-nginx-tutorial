@@ -357,6 +357,88 @@ include_path = &quot;.:/usr/local/nginx/php&quot;
 <p>&#x7531;&#x4E8E;java&#x672C;&#x8EAB;&#x5BF9;javascript&#x7684;&#x826F;&#x597D;&#x652F;&#x6301;&#xFF0C;&#x4F7F;&#x5F97;&#x5728;hi-nginx&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;javascript&#x811A;&#x672C;&#x4E2D;&#x4F7F;&#x7528;java&#x2014;&#x2014;&#x76F8;&#x5F53;&#x4E8E;&#x628A;java&#x5D4C;&#x5165;&#x4E86;javascript&#x3002;</p>
 <h3 id="&#x57FA;&#x4E8E;duktape&#x7684;&#x65B9;&#x6848;">&#x57FA;&#x4E8E;duktape&#x7684;&#x65B9;&#x6848;</h3>
 <p>&#x8BE5;&#x65B9;&#x6848;&#x57FA;&#x4E8E;&#x5F00;&#x6E90;javascript&#x5F15;&#x64CE;&#x3002;&#x5982;&#x679C;&#x719F;&#x6089;&#x8BE5;&#x5F15;&#x64CE;&#x7684;api&#xFF0C;&#x5F00;&#x53D1;C/C++&#x6269;&#x5C55;&#x662F;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x3002;&#x5728;&#x7528;&#x6CD5;&#x4E0A;&#xFF0C;&#x5B83;&#x7C7B;&#x4F3C;&#x4E8E;lua&#x3002;</p>
+<p>&#x8BE5;&#x65B9;&#x6848;&#x652F;&#x6301;&#x52A8;&#x6001;&#x5E93;&#x52A0;&#x8F7D;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x52A8;&#x6001;&#x5E93;&#x4E2D;&#x6CE8;&#x518C;c&#x51FD;&#x6570;&#x4EE5;&#x53CA;c++&#x51FD;&#x6570;&#x548C;&#x7C7B;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-cpp">
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dukglue/dukglue.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dukglue/duktape.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dukglue/duktape_object.hpp&gt;</span></span>
+
+
+<span class="hljs-keyword">class</span> demo : <span class="hljs-keyword">public</span> hi::duktape_object {
+<span class="hljs-keyword">public</span>:
+    demo() = <span class="hljs-keyword">default</span>;
+    <span class="hljs-keyword">virtual</span>~demo() = <span class="hljs-keyword">default</span>;
+
+    <span class="hljs-built_in">std</span>::<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">echo</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&amp; text)</span> </span>{
+        <span class="hljs-keyword">return</span> text;
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> loaded;
+};
+
+<span class="hljs-keyword">bool</span> demo::loaded = <span class="hljs-literal">false</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> {
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+    <span class="hljs-keyword">duk_ret_t</span> cpp(duk_context *ctx) {
+        <span class="hljs-keyword">if</span> (!demo::loaded) {
+            dukglue_register_constructor&lt;demo&gt;(ctx, <span class="hljs-string">&quot;demo&quot;</span>);
+            dukglue_register_method(ctx, &amp;demo::echo, <span class="hljs-string">&quot;echo&quot;</span>);
+            demo::loaded = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (demo::loaded) {
+            duk_push_true(ctx);
+        } <span class="hljs-keyword">else</span> {
+            duk_push_false(ctx);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; <span class="hljs-comment">/* one return value */</span>
+    }
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+}
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+</code></pre>
+<pre><code class="lang-Makefile">
+
+PROJECT=demo.so
+SRC=<span class="hljs-variable">$(shell find . -type f | egrep *.cpp$$)</span>
+OBJ=<span class="hljs-variable">$(patsubst %.cpp,%.o,$(SRC)</span>)
+
+ifndef NGINX_INSTALL_DIR
+NGINX_INSTALL_DIR=/usr/local/nginx
+endif
+
+CXX=g++ 
+CXXFLAGS+=-O3 -std=c++11 -fPIC -Wall -I<span class="hljs-variable">$(NGINX_INSTALL_DIR)</span>/include
+LDLIBS+=-lduktape
+LDFLAGS+=-shared 
+
+all:$(PROJECT)
+
+$(PROJECT): $(OBJ)
+    $(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) 
+
+<span class="hljs-section">clean:</span>
+    rm -f  $(OBJ) $(PROJECT)
+
+<span class="hljs-section">install:</span>
+    test -d $(NGINX_INSTALL_DIR)/duktape/package || mkdir -p $(NGINX_INSTALL_DIR)/duktape/package
+    install $(PROJECT) $(NGINX_INSTALL_DIR)/duktape/package
+</code></pre>
+<pre><code class="lang-javascript">
+<span class="hljs-keyword">var</span> loaded = hi_module.require(<span class="hljs-string">&apos;demo&apos;</span>, <span class="hljs-string">&apos;cpp&apos;</span>)
+<span class="hljs-keyword">var</span> registered = cpp()
+<span class="hljs-keyword">if</span> (loaded &amp;&amp; registered) {
+    <span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> demo()
+    hi_res.header(<span class="hljs-string">&apos;Content-Type&apos;</span>, <span class="hljs-string">&apos;text/plain;charset=UTF-8&apos;</span>)
+    hi_res.content(a.echo(<span class="hljs-string">&apos;hello,cpp class&apos;</span>))
+    hi_res.status(<span class="hljs-number">200</span>)
+    hi_module.free(a)
+}
+</code></pre>
 
                                 
                                 </section>
@@ -400,7 +482,7 @@ include_path = &quot;.:/usr/local/nginx/php&quot;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"安装","level":"1.2","depth":1,"next":{"title":"使用","level":"1.3","depth":1,"path":"00/001.md","ref":"00/001.md","articles":[{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},{"title":"配置例子","level":"1.3.2","depth":2,"path":"00/0002.md","ref":"00/0002.md","articles":[]},{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},{"title":"hi-project","level":"1.3.4","depth":2,"path":"00/0004.md","ref":"00/0004.md","articles":[]},{"title":"开关","level":"1.3.5","depth":2,"path":"00/0005.md","ref":"00/0005.md","articles":[]},{"title":"表单","level":"1.3.6","depth":2,"path":"00/0006.md","ref":"00/0006.md","articles":[]},{"title":"编程接口","level":"1.3.7","depth":2,"path":"00/0007.md","ref":"00/0007.md","articles":[]}]},"previous":{"title":"hi-nginx 使用说明","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/000.md","mtime":"2018-12-25T12:53:16.432Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-25T21:43:32.279Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"安装","level":"1.2","depth":1,"next":{"title":"使用","level":"1.3","depth":1,"path":"00/001.md","ref":"00/001.md","articles":[{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},{"title":"配置例子","level":"1.3.2","depth":2,"path":"00/0002.md","ref":"00/0002.md","articles":[]},{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},{"title":"hi-project","level":"1.3.4","depth":2,"path":"00/0004.md","ref":"00/0004.md","articles":[]},{"title":"开关","level":"1.3.5","depth":2,"path":"00/0005.md","ref":"00/0005.md","articles":[]},{"title":"表单","level":"1.3.6","depth":2,"path":"00/0006.md","ref":"00/0006.md","articles":[]},{"title":"编程接口","level":"1.3.7","depth":2,"path":"00/0007.md","ref":"00/0007.md","articles":[]}]},"previous":{"title":"hi-nginx 使用说明","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/000.md","mtime":"2018-12-26T02:32:34.017Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-26T02:35:04.872Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
