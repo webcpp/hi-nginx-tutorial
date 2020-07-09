@@ -21,11 +21,5 @@
 
 更主要的是，hi-nginx提供的内嵌应用服务的性能远比反向代理服务的性能要高，实际上要高得多。
 
-![ab.png](https://www.hi-nginx.com/image/ab.png)
-
-总之，hi-nginx是nginx的超集，它继承了nginx的优良血统，是能够支持超大并发量的应用服务器。
 
 
-[help.hi-nginx.com](https://help.hi-nginx.com/) gitbook.
-
-[doc.hi-nginx.com](https://doc.hi-nginx.com/) gitbook.
