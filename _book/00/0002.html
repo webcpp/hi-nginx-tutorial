@@ -320,12 +320,12 @@ server {
     hi_need_cookies off;
     hi_need_session off;
     hi_session_expires 300s;
-    hi_java_classpath &quot;-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar&quot;;
-    hi_java_options &quot;-server -d64 -Xms512m -Xmx512m -Xmn170m&quot;;
+    hi_java_classpath &quot;-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/lib/groovy/lib:/usr/lib/groovy/indy:/usr/lib/groovy/indy/groovy-3.0.6-indy.jar:/usr/lib/groovy/indy/groovy-jsr223-3.0.6-indy.jar&quot;;
+    hi_java_options &quot;-server -d64 -Dnashorn.args=--global-per-engine -Xms512m -Xmx512m -Xmn170m&quot;;
     hi_java_servlet_cache_expires 300s;
     hi_java_servlet_cache_size 10;
     hi_java_version 8;
-    hi_lua_package_path &apos;/usr/local/nginx/lua/?.lua;&apos;;
+    hi_lua_package_path &apos;/usr/local/nginx/lua/?.lua;/usr/local/nginx/lua/package/?.lua;&apos;;
     hi_lua_package_cpath &apos;/usr/local/nginx/lua/?.so;&apos;;
 
     hi_qjs_memory_limit 1024m;
@@ -337,15 +337,14 @@ server {
     autoblacklist_expires 86400s;#&#x6076;&#x610F;ip&#x5C01;&#x7981;&#x65F6;&#x957F;&#xFF0C;&#x9ED8;&#x8BA4;1&#x5929;
     autoblacklist_limit 30;#&#x5BA2;&#x6237;&#x7AEF;&#x9650;&#x901F;&#x6307;&#x6807;&#xFF0C;&#x9ED8;&#x8BA4;&#x6BCF;&#x79D2;30&#x6B21;
 
-
-    location ~ \.(cpp|lua|py|qjs|java|php) {
+    location ~ \.(cpp|lua|py|qjs|java|php|groovy|jjs) {
         hi_need_kvdb off;
         hi_need_cache off;
         hi_cache_expires 5s;
-        hi_need_headers off;
         hi_need_cookies off;
         hi_need_session off;
         hi_session_expires 300s;
+        hi_need_headers off;
 
         set $app_t $1;
 
@@ -361,7 +360,7 @@ server {
 
         if ( $app_t = py ) {
             rewrite ^/(.*)\.py$ /$1 break;
-            hi_need_cache on;
+            hi_need_cache off;
             hi_cache_expires 1s;
             hi_python_script python/index.py;
         }
@@ -376,16 +375,40 @@ server {
             hi_need_kvdb on;
             hi_kvdb_size 50;
             hi_kvdb_expires 5m;
-            hi_javascript_lang javascript;
-            hi_javascript_extension js;
-            #hi_javascript_content &quot;hi_res.content=&apos;hello,world&apos;;hi_res.status=200;&quot;;
             hi_java_servlet hi/jdemo;    
         }
 
+        if ( $app_t = jjs ) {
+            rewrite ^/(.*)\.jjs$ /$1 break;
+            hi_need_kvdb on;
+            hi_kvdb_size 50;
+            hi_kvdb_expires 5m;
+            hi_javascript_lang javascript;
+            hi_javascript_extension js;
+            #hi_javascript_content &quot;hi_res.content=&apos;hello,world&apos;;hi_res.status=200;&quot;;
+            hi_javascript_script java/index.js;    
+        }
+
+        if ( $app_t = groovy ) {
+            rewrite ^/(.*)\.groovy$ /$1 break;
+            hi_need_kvdb on;
+            hi_kvdb_size 50;
+            hi_kvdb_expires 5m;
+            hi_javascript_lang groovy;
+            hi_javascript_extension groovy;
+            hi_javascript_script java/index.groovy;    
+        }
+
+
         if ( $app_t = php ) {
             rewrite ^/(.*)\.php$ /$1 break;
+            hi_need_kvdb off;
+            hi_kvdb_size 50;
+            hi_kvdb_expires 5m;
             hi_php_script php/index.php;
         }
+
+    }
 
 
     location ^~ /sub {
@@ -490,7 +513,7 @@ hello,world
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"配置例子","level":"1.3.2","depth":2,"next":{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},"previous":{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/0002.md","mtime":"2020-07-13T02:41:13.004Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-07-25T11:47:04.829Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"配置例子","level":"1.3.2","depth":2,"next":{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},"previous":{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/0002.md","mtime":"2020-10-27T00:13:55.984Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-27T00:15:07.984Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
