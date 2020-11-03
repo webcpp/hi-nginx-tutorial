@@ -321,7 +321,7 @@ server {
     hi_need_session off;
     hi_session_expires 300s;
     hi_java_classpath &quot;-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/lib/groovy/lib:/usr/lib/groovy/indy:/usr/lib/groovy/indy/groovy-3.0.6-indy.jar:/usr/lib/groovy/indy/groovy-jsr223-3.0.6-indy.jar&quot;;
-    hi_java_options &quot;-server -d64 -Dnashorn.args=--global-per-engine -Xms512m -Xmx512m -Xmn170m&quot;;
+    hi_java_options &quot;-server -d64 -Dnashorn.args=--global-per-engine&quot;;
     hi_java_servlet_cache_expires 300s;
     hi_java_servlet_cache_size 10;
     hi_java_version 8;
@@ -432,43 +432,10 @@ server {
 
 }
 </code></pre>
-<pre><code class="lang-shell">for i in cpp qjs lua java py php; do echo $i ; echo `curl http://localhost/test.$i`; done;
-</code></pre>
-<pre><code class="lang-txt">cpp
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    11  100    11    0     0  14138      0 --:--:-- --:--:-- --:--:-- 11000
-hello,world
-qjs
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    12  100    12    0     0  16326      0 --:--:-- --:--:-- --:--:-- 12000
-hello,world
-lua
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    11  100    11    0     0   5544      0 --:--:-- --:--:-- --:--:-- 11000
-hello,world
-java
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    11  100    11    0     0  11627      0 --:--:-- --:--:-- --:--:-- 11000
-hello,world
-py
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    11  100    11    0     0   7503      0 --:--:-- --:--:-- --:--:-- 11000
-hello,world
-php
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100    11  100    11    0     0  13563      0 --:--:-- --:--:-- --:--:-- 11000
-hello,world
-</code></pre>
 <h1 id="&#x7279;&#x522B;&#x8BF4;&#x660E;">&#x7279;&#x522B;&#x8BF4;&#x660E;</h1>
 <p>&#x4EE5;&#x4E0A;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x6F14;&#x793A;&#x5747;&#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6309;&#x7167;&#x914D;&#x7F6E;&#x542F;&#x52A8;&#x540E;&#x53D1;&#x73B0;404&#x9519;&#x8BEF;&#xFF0C;&#x591A;&#x534A;&#x662F;&#x4F60;&#x542F;&#x52A8;hi-nginx&#x7684;&#x65B9;&#x5F0F;&#x4F7F;&#x5F97;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x65E0;&#x6548;&#x3002;</p>
 <p>&#x8FD9;&#x65F6;&#xFF0C;&#x8F83;&#x5DEE;&#x7684;&#x5EFA;&#x8BAE;&#x662F;&#x628A;&#x914D;&#x7F6E;&#x6539;&#x6210;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x8F83;&#x597D;&#x7684;&#x5EFA;&#x8BAE;&#x662F;&#x53EA;&#x901A;&#x8FC7;<code>systemctl</code>&#x542F;&#x52A8;&#xFF0C;&#x4ECE;&#x800C;&#x786E;&#x4FDD;&#x542F;&#x52A8;&#x76EE;&#x5F55;&#x6B63;&#x786E;&#x3001;&#x4ECE;&#x800C;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x6709;&#x6548;&#x3002;</p>
-<p>&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x540E;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;<code>systemctl reload nginx</code>&#x3002;</p>
+<p>&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x540E;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;<code>systemctl reload nginx</code>(&#x6700;&#x597D;&#x7528;<code>restart</code>&#xFF0C;NGINX&#x7684;<code>reload</code>&#x6709;&#x65F6;&#x4F3C;&#x4E4E;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#x3002;)&#x3002;</p>
 <p>&#x5B89;&#x88C5;&#x5305;&#x4E2D;&#x6709;&#x793A;&#x4F8B;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x53C2;&#x8003;&#x3002;</p>
 
                                 
@@ -513,7 +480,7 @@ hello,world
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"配置例子","level":"1.3.2","depth":2,"next":{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},"previous":{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/0002.md","mtime":"2020-10-27T00:13:55.984Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-29T12:39:11.775Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"配置例子","level":"1.3.2","depth":2,"next":{"title":"起步","level":"1.3.3","depth":2,"path":"00/0003.md","ref":"00/0003.md","articles":[]},"previous":{"title":"配置命令","level":"1.3.1","depth":2,"path":"00/0001.md","ref":"00/0001.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00/0002.md","mtime":"2020-11-03T07:12:05.064Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-11-03T07:19:51.054Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
