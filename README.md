@@ -9,11 +9,11 @@
 它支持哪些编程语言？它们是：
 
 - C++
-- java,javascript,jsr233 JVM language
+- java,jsr223 JVM language
 - lua
 - python
 - php
-- javascript
+- quickjs
 
 这些编程语言中，前两种属于编译型语言，后几种则属于解释型语言。这意味着，当解释型语言无力承担性能需求时，你可以切换至编译型语言；而当编译型语言无力追赶开发进度表时，你可以切换至解释型语言。
 
