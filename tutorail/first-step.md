@@ -39,7 +39,7 @@ public class index implements hi.servlet {
     }
 
     public void handler(hi.request req, hi.response res) {
-        res.headers.get("Content-Type").set(0, "text/plain;charset=UTF-8");
+        res.set_content_type("text/plain;charset=UTF-8");
         res.status = 200;
         res.content = "hello,world";
 

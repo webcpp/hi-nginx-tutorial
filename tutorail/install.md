@@ -29,7 +29,7 @@
 - python3.x-devel 如果 `--enable-http-hi-python=YES` 并且 `with-http-hi-python-version=python3`
 - lua-devel(lua5.1,5.2,5.3),如果 `--enable-http-hi-lua=YES`  并且 `--with-http-hi-lua-version=lua5.x`
 - luajit-devel,如果 `--enable-http-hi-lua=YES` 并且 `--with-http-hi-lua-version=luajit`
-- jdk,如果 `--enable-http-hi-java=YES`
+- jdk8+,如果 `--enable-http-hi-java=YES`
 - PHP 7.0,7.1,7.2(--enable-embed=shared),如果 `--enable-http-hi-php=YES`
 
 ## systemctl
@@ -105,7 +105,7 @@ hi-nginx对javascript的支持是通过javax.script.ScriptEngine实现的。这�
 
 ```nginx
 
-        hi_java_classpath "-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/local/groovy-3.0.6/lib:/usr/local/groovy-3.0.6/lib/groovy-2.5.0.jar:/usr/local/groovy-3.0.6/lib/groovy-jsr223-3.0.6.jar";
+        hi_java_classpath "-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/local/groovy-3.0.6/lib:/usr/local/groovy-3.0.6/lib/groovy-3.6.0.jar:/usr/local/groovy-3.0.6/lib/groovy-jsr223-3.0.6.jar";
 
         location / {
                 hi_need_cache off;
