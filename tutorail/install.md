@@ -82,7 +82,7 @@ include_path = ".:/usr/local/nginx/php"
 
 #cat /etc/profile.d/jdk.sh
 export JAVA_HOME=/usr/lib/jvm/default-java
-export CLASSPATH=/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx.jar
+export CLASSPATH=/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar
 export PATH=$JAVA_HOME/bin:$PATH
 
 ```
