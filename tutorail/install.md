@@ -29,7 +29,7 @@
 - python3.x-devel 如果 `--enable-http-hi-python=YES` 并且 `with-http-hi-python-version=python3`
 - lua-devel(lua5.1,5.2,5.3),如果 `--enable-http-hi-lua=YES`  并且 `--with-http-hi-lua-version=lua5.x`
 - luajit-devel,如果 `--enable-http-hi-lua=YES` 并且 `--with-http-hi-lua-version=luajit`
-- jdk8+,如果 `--enable-http-hi-java=YES`
+- jdk11+,如果 `--enable-http-hi-java=YES`
 - PHP 7.0,7.1,7.2(--enable-embed=shared),如果 `--enable-http-hi-php=YES`
 
 ## systemctl
@@ -69,8 +69,7 @@ include_path = ".:/usr/local/nginx/php"
 如果有必要，还需把libphp7.so所在的路径添加到`/etc/ld.so.conf.d/php.conf`中。
 
 ## 关于java支持
-
-强烈建议使用java版本不低于 1.8。
+虽然hi-nginx可以在java8环境下工作，但为了配合hi-nginx-java的升级，强烈建议java版本不低于 11。
 
 最简单方法是直接安装openjdk，如果不怕麻烦，用oracle的也可以的。从[http://jdk.java.net/](http://jdk.java.net/)下载openjdk安装包，解压，安装至`/usr/lib/jvm`目录下；同时创建一个`default-java`得符号链接，指向openjdk安装目录即可。关键是设置$JAVA_HOME和java搜索路径，否则编译hi-nginx时无法找到相关java库和头文件，运行时会无法加载libjvm.so。推荐的方案：
 
@@ -78,6 +77,7 @@ include_path = ".:/usr/local/nginx/php"
 #cat /etc/ld.so.conf.d/jdk.conf 
 /usr/lib/jvm/default-java/lib/server
 /usr/lib/jvm/default-java/lib
+/usr/lib/jvm/default-java/jre/lib/amd64/server
 
 
 #cat /etc/profile.d/jdk.sh
@@ -86,7 +86,7 @@ export CLASSPATH=/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar
 export PATH=$JAVA_HOME/bin:$PATH
 
 ```
-根据自己的jdk版本和安装目录，修改其中的相关项即可。
+根据自己的jdk版本和安装目录，修改其中的相关项即可。注意其中`/usr/lib/jvm/default-java/jre/lib/amd64/server`项就是特别针对java8的安排。
 
 记得`sudo ldconfig`。
 
