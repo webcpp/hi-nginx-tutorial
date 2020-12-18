@@ -228,6 +228,18 @@ or
 
 ```
 
+- directives : content:  http,srv,if in srv
+    - **hi_qjs_stack_limit** ,default: 8m
+
+    example:
+    
+```nginx
+
+
+            hi_qjs_stack_limit 8m;
+
+
+```
 
 - directives : content:  http,srv,if in srv
     - **hi_qjs_ctx_called_limit**,default: 10240
@@ -275,12 +287,12 @@ hi_java_classpath "-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/ja
 ```
 
 - directives : content: http,srv,if in srv
-    - hi_java_options,default:"-server -d64 -Xmx1G -Xms1G -Xmn256m"
+    - hi_java_options,default:"-server -d64"
 
     example:
 
 ```nginx
-hi_java_options "-server -d64 -Xmx3G -Xms3G -Xmn768m -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled -XX:MaxTenuringThreshold=15 -XX:MaxGCPauseMillis=30 -XX:GCPauseIntervalMillis=150 -XX:+UseAdaptiveGCBoundary -XX:-UseGCOverheadLimit -XX:+UseBiasedLocking -XX:SurvivorRatio=8 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=15 -Dfml.ignorePatchDiscrepancies=true -Dfml.ignoreInvalidMinecraftCertificates=true -XX:+UseFastAccessorMethods -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:+AggressiveOpts -XX:ReservedCodeCacheSize=2048m -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=10000 -XX:ParallelGCThreads=10";
+hi_java_options "-server -d64 -Dnashorn.args=--global-per-engine";
 
 ```
 
