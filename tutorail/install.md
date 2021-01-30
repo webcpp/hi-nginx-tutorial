@@ -90,46 +90,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 记得`sudo ldconfig`。
 
-## 关于javascript支持
 
-hi-nginx对javascript的支持方案有两种。
-
-第一种基于java，第二种基于quickjs。前者比较吃内存，但能方便嵌入java库类。
-后者很轻，采用c/c++语言实现，故而对熟悉c/c++的开发者更有利。
-
-### 基于Java的方案
-
-hi-nginx对javascript的支持是通过javax.script.ScriptEngine实现的。这种实现有两种方式，第一种是在java层，第二种是走jni。两种都是可行的。在hi-nginx-demo项目中，我给出了一个基于java层的简单实现。在hi-nginx项目中采用的基于jni实现。这种实现的好处是能够充分利用c/c++的优势降低JVM对内存的消耗，而且可以获得更高的性能表现。
-
-更重要的是，因为可以利用javax.script.ScriptEngine接口，所以任何实现JSR-223的基于JVM的脚本语言，都是可以直接支持的，例如groovy和kotlin——当然需要安装相关语言并正确设置配置。比如gooovy：
-
-```nginx
-
-        hi_java_classpath "-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/local/groovy-3.0.6/lib:/usr/local/groovy-3.0.6/lib/groovy-3.6.0.jar:/usr/local/groovy-3.0.6/lib/groovy-jsr223-3.0.6.jar";
-
-        location / {
-                hi_need_cache off;
-                hi_cache_expires 5s;
-                hi_need_kvdb on;
-                hi_kvdb_size 10;
-                hi_kvdb_expires 5m;
-                hi_need_cookies on;
-                hi_need_headers on;
-                hi_need_session on;
-                hi_session_expires 300s;
-                hi_javascript_compiledscript_expires 5m;
-                hi_javascript_lang groovy;
-                hi_javascript_extension groovy;
-                hi_javascript_script groovy/index.groovy;
-        }
-
-```
-
-有一点必须指出：如果你需要运行多种jsr-223的JVM语言，比如javascript和groovy，那么由于JVM是进程级的，每个进程只有一个JVM，且只会初始化一次，所以为了确保多种JVM语言能够同时运行，需要确保JVM初始化时的`hi_java_classpath`指令参数能够同时为多种语言所用。比如，单单运行javascript，不需要跟groovy有关的配置，但是若同时需要运行groovy,则需要添加相关配置。
-
-由于java本身对javascript的良好支持，使得在hi-nginx中，可以直接在javascript脚本中使用java——相当于把java嵌入了javascript。注意：java14是最后一个支持javasrcipt引擎得java版本，故而欲同时使用java和js，java版本不能超过java14。当然，最好的选择似乎是groovy。java8以上均能获得很好得支持。
-
-### 基于quickjs的方案
+## 关于quickjs支持
 原来v2.0.3之前有个基于duktape引擎的方案。自v2.0.3开始，替换为现在的方案。
 该方案基于开源javascript引擎quickjs。如果熟悉该引擎的api，开发C/C++扩展是很容易。具体可参考quickjs官网介绍。
 

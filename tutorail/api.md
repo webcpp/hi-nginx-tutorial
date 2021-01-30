@@ -11,7 +11,7 @@ cpp接口基于STL实现，非常容易操作，不多说了。如果还不熟�
 具体实现参考hi-nginx安装目录下的`include`。
 
 
-## java,javascript以及jsr-223 JVM language 接口
+## java 接口
 
 java接口也非常简单，包括`String`,`HashMap<String, String>`和`HashMap<String, ArrayList<String>>`。没什么好说的。
 
@@ -100,7 +100,7 @@ php有神奇的array类型，所以，除了字符串，一切都是它了。
 # 附注
 
 - 对于php使用者，强烈推荐采用引入`hi/route.php`并采用单一入口模式。
-- 对于python使用者，强烈推荐采用[hi.py框架](https://github.com/webcpp/hi.py),它实现单一入口模式，并提供一个类似flask或bottle的迷你框架，但比两者都要快的多。最佳使用方法，请务必参考[hi.py框架例子](https://github.com/webcpp/pyexample)
+- 对于python使用者，强烈推荐采用[hi.py框架](https://github.com/webcpp/hi.py),它实现单一入口模式，并提供一个类似flask或bottle的框架，但比两者都要快的多。最佳使用方法，请务必参考[hi.py框架例子](https://github.com/webcpp/pyexample)
 - 在hi-nginx强劲的缓存机制下，没有什么慢脚本是不能大幅度提速的。
 
 [hi-nginx-demo](https://github.com/webcpp/hi-nginx-demo)提供各种语言的演示开发方法，敬请参考。

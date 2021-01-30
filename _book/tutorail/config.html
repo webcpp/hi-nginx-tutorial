@@ -672,64 +672,44 @@
             }
 </code></pre>
 <ul>
-<li><p>directives : content: loc,if in loc</p>
+<li><p>directives : content: loc if in loc</p>
 <ul>
-<li><p>hi_javascript_lang,default:javascript</p>
+<li><p><strong>hi_subrequest</strong>, default : &quot;&quot;</p>
 <p>example:</p>
 </li>
 </ul>
 </li>
 </ul>
-<pre><code class="lang-nginx"><span class="hljs-attribute">hi_javascript_lang</span> javascript;
-</code></pre>
-<ul>
-<li><p>directives : content: loc,if in loc</p>
-<ul>
-<li><p>hi_javascript_extension,default:js</p>
-<p>example:</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-nginx"><span class="hljs-attribute">hi_javascript_extension</span> js;
-</code></pre>
-<ul>
-<li><p>directives : content: loc,if in loc</p>
-<ul>
-<li><p>hi_javascript_content,default:&quot;&quot;</p>
-<p>example:</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-nginx"><span class="hljs-attribute">hi_javascript_content</span> <span class="hljs-string">&quot;hi_res.content=&apos;hello,world&apos;;hi_res.status=200;&quot;</span>;
-</code></pre>
-<ul>
-<li><p>directives : content: loc,if in loc</p>
-<ul>
-<li><p>hi_javascript_script,default:&quot;&quot;</p>
-<p>example:</p>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-nginx"><span class="hljs-attribute">hi_javascript_script</span> javascript/index.js;
-</code></pre>
-<p>or</p>
 <pre><code class="lang-nginx">
-<span class="hljs-attribute">hi_javascript_script</span> javascript;
+        location ^~ /sub {
+                hi_subrequest &apos;/query&apos;;
+                hi_lua_content &apos;hi_res:header(&quot;Content-Type&quot;,hi_req:get_form(&quot;__subrequest_content_type__&quot;))\nhi_res:status(tonumber(hi_req:get_form(&quot;__subrequest_status__&quot;)))\nhi_res:content(hi_req:get_form(&quot;__subrequest_body__&quot;))&apos;;
+        }
+
+        location ^~ /query {
+                internal;
+                proxy_pass http://http://hq.sinajs.cn/;
+                proxy_set_header Accept-Encoding &apos;&apos;;
+        }
+#  curl -i http://localhost/sub?list=sh601006
 </code></pre>
 <ul>
 <li><p>directives : content: http,srv,loc,if in loc ,if in srv</p>
 <ul>
-<li><p>hi_javascript_compiledscript_expires,default:300s</p>
+<li><strong>autoblacklist</strong>, default : &quot;off&quot;</li>
+<li><strong>autoblacklist_size</strong>, default : 1024</li>
+<li><strong>autoblacklist_limit</strong>, default : 30</li>
+<li><p><strong>autoblacklist_expires</strong>, default : 86400s </p>
 <p>example:</p>
 </li>
 </ul>
 </li>
 </ul>
 <pre><code class="lang-nginx">
-<span class="hljs-attribute">hi_javascript_compiledscript_expires</span> <span class="hljs-number">5m</span>;
+    <span class="hljs-attribute">autoblacklist</span> <span class="hljs-literal">on</span>|<span class="hljs-literal">off</span>;
+    <span class="hljs-attribute">autoblacklist_size</span> <span class="hljs-number">1024</span>;
+    <span class="hljs-attribute">autoblacklist_expires</span> <span class="hljs-number">86400s</span>;
+    <span class="hljs-attribute">autoblacklist_limit</span> <span class="hljs-number">30</span>;
 </code></pre>
 <h1 id="&#x7279;&#x522B;&#x8BF4;&#x660E;">&#x7279;&#x522B;&#x8BF4;&#x660E;</h1>
 <p>&#x4EE5;&#x4E0A;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x6F14;&#x793A;&#x5747;&#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6309;&#x7167;&#x914D;&#x7F6E;&#x542F;&#x52A8;&#x540E;&#x53D1;&#x73B0;404&#x9519;&#x8BEF;&#xFF0C;&#x591A;&#x534A;&#x662F;&#x4F60;&#x542F;&#x52A8;hi-nginx&#x7684;&#x65B9;&#x5F0F;&#x4F7F;&#x5F97;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x65E0;&#x6548;&#x3002;</p>
@@ -778,7 +758,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"配置命令","level":"1.3.1","depth":2,"next":{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},"previous":{"title":"使用","level":"1.3","depth":1,"path":"tutorail/usage.md","ref":"tutorail/usage.md","articles":[{"title":"配置命令","level":"1.3.1","depth":2,"path":"tutorail/config.md","ref":"tutorail/config.md","articles":[]},{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},{"title":"起步","level":"1.3.3","depth":2,"path":"tutorail/first-step.md","ref":"tutorail/first-step.md","articles":[]},{"title":"hi-project","level":"1.3.4","depth":2,"path":"tutorail/hi-project.md","ref":"tutorail/hi-project.md","articles":[]},{"title":"开关","level":"1.3.5","depth":2,"path":"tutorail/switch.md","ref":"tutorail/switch.md","articles":[]},{"title":"表单","level":"1.3.6","depth":2,"path":"tutorail/form.md","ref":"tutorail/form.md","articles":[]},{"title":"编程接口","level":"1.3.7","depth":2,"path":"tutorail/api.md","ref":"tutorail/api.md","articles":[]},{"title":"子请求","level":"1.3.8","depth":2,"path":"tutorail/subrequest.md","ref":"tutorail/subrequest.md","articles":[]},{"title":"安全","level":"1.3.9","depth":2,"path":"tutorail/safe.md","ref":"tutorail/safe.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/config.md","mtime":"2020-12-18T20:13:33.464Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-12-18T20:14:07.454Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"配置命令","level":"1.3.1","depth":2,"next":{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},"previous":{"title":"使用","level":"1.3","depth":1,"path":"tutorail/usage.md","ref":"tutorail/usage.md","articles":[{"title":"配置命令","level":"1.3.1","depth":2,"path":"tutorail/config.md","ref":"tutorail/config.md","articles":[]},{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},{"title":"起步","level":"1.3.3","depth":2,"path":"tutorail/first-step.md","ref":"tutorail/first-step.md","articles":[]},{"title":"hi-project","level":"1.3.4","depth":2,"path":"tutorail/hi-project.md","ref":"tutorail/hi-project.md","articles":[]},{"title":"开关","level":"1.3.5","depth":2,"path":"tutorail/switch.md","ref":"tutorail/switch.md","articles":[]},{"title":"表单","level":"1.3.6","depth":2,"path":"tutorail/form.md","ref":"tutorail/form.md","articles":[]},{"title":"编程接口","level":"1.3.7","depth":2,"path":"tutorail/api.md","ref":"tutorail/api.md","articles":[]},{"title":"子请求","level":"1.3.8","depth":2,"path":"tutorail/subrequest.md","ref":"tutorail/subrequest.md","articles":[]},{"title":"安全","level":"1.3.9","depth":2,"path":"tutorail/safe.md","ref":"tutorail/safe.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/config.md","mtime":"2021-01-30T09:15:12.062Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-30T09:51:39.886Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
