@@ -6,7 +6,7 @@ hi-project是一个创建hi-nginx模板化工程的脚本。`--help`可查看使
 
 $1:project name.
 	default:demo
-$2:type:cpp,python,lua ,php , java
+$2:type:cpp,python,lua ,php , java,quickjs
 	default:cpp
 $3:hi(nginx) install directory.
 	default:/usr/local/nginx
