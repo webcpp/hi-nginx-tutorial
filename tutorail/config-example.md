@@ -83,27 +83,6 @@ server {
 		    hi_java_servlet hi/jdemo;	
         }
 
-        if ( $app_t = jjs ) {
-            rewrite ^/(.*)\.jjs$ /$1 break;
-            hi_need_kvdb on;
-		    hi_kvdb_size 50;
-		    hi_kvdb_expires 5m;
-		    hi_javascript_lang javascript;
-		    hi_javascript_extension js;
-            #hi_javascript_content "hi_res.content='hello,world';hi_res.status=200;";
-		    hi_javascript_script java/index.js;	
-        }
-
-        if ( $app_t = groovy ) {
-            rewrite ^/(.*)\.groovy$ /$1 break;
-            hi_need_kvdb on;
-		    hi_kvdb_size 50;
-		    hi_kvdb_expires 5m;
-		    hi_javascript_lang groovy;
-		    hi_javascript_extension groovy;
-		    hi_javascript_script java/index.groovy;	
-        }
-
 
         if ( $app_t = php ) {
             rewrite ^/(.*)\.php$ /$1 break;
