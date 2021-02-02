@@ -42,7 +42,7 @@ server {
 	autoblacklist_expires 86400s;#恶意ip封禁时长，默认1天
 	autoblacklist_limit 30;#客户端限速指标，默认每秒30次
 
-    location ~ \.(cpp|lua|py|qjs|java|php|groovy|jjs) {
+    location ~ \.(cpp|lua|py|qjs|java|php) {
         hi_need_kvdb off;
 		hi_need_cache off;
 		hi_cache_expires 5s;
