@@ -98,6 +98,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 除了quickjs官网内置的模块`os`,`std`,`bjson`，我附加了三个功能模块：`hi`,`crypto`和`hash`。具体用法请参考安装文件包里的`qjs`目录。
 
 ## 关于第三方模块
-hi-nginx自带两个第三方模块，在`3rd`目录中，需要的话，用`--add-module=3rd/[module_name]`添加到编译配置命令中即可。
+hi-nginx自带几个第三方模块，在`3rd`目录中，需要的话，用`--add-module=3rd/[module_name]`添加到编译配置命令中即可。
 
 如果需要更多第三方模块，可以自行下载需要的模块。其实，很多常用的第三方模块都可以在[这里](https://github.com/alibaba/tengine/tree/master/modules)和[这里](https://www.nginx.com/resources/wiki/modules/)找到。各取所需吧，建议统一放在`3rd`目录中——凡nginx能接受的，hi-nginx必能接受。
