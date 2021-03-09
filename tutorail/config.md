@@ -337,25 +337,6 @@ hi_java_version 8;
 
 ```
 
-- directives : content: loc,if in loc
-    - hi_php_script,default: ""
-
-    example:
-    
-```nginx
-            location ~ \.php$  {
-                hi_php_script php;
-            }
-```
-
-or
-
-```nginx
-            location / {
-                hi_php_script php/index.php;
-            }
-```
-
 - directives : content: loc if in loc
     - **hi_subrequest**, default : ""
 

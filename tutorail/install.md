@@ -9,7 +9,6 @@
                 --enable-http-hi-lua=YES                            \
                 --enable-http-hi-qjs=YES                            \
                 --enable-http-hi-java=YES                           \
-                --enable-http-hi-php=YES                            \
                 --with-http-hi-python-version=python3               \
                 --with-http-hi-lua-version=lua5.3                   \
                 --add-module=module/ngx_http_hi_module              \
@@ -30,7 +29,6 @@
 - lua-devel(lua5.1,5.2,5.3),如果 `--enable-http-hi-lua=YES`  并且 `--with-http-hi-lua-version=lua5.x`
 - luajit-devel,如果 `--enable-http-hi-lua=YES` 并且 `--with-http-hi-lua-version=luajit`
 - jdk8+,如果 `--enable-http-hi-java=YES`
-- PHP 7.0,7.1,7.2(--enable-embed=shared),如果 `--enable-http-hi-php=YES`
 
 ## systemctl
 
@@ -39,34 +37,7 @@
 这是保证启动目录正确，从而配置时保证相对路径有效的最简单的方法。
 
 
-## 关于php7支持
-要安装php7支持，需要编译安装php7时添加--enable-embed=shared配置选项。这是必须的。
 
-另外，如果是7.0和7.1，似乎需要把php7源码包中configure脚本需要略略的修改下。找到该脚本中的以下段落：
-```
-ac_fn_c_check_decl "$LINENO" "isfinite" "ac_cv_have_decl_isfinite" "#include <math.h>
-"
-if test "x$ac_cv_have_decl_isfinite" = xyes; then :
-  ac_have_decl=1
-else
-  ac_have_decl=0
-fi
-
-```
-
-把第一等于1的等式改为等于0即可。
-
-7.2不需要上述修改。
-
-编译安装完成php7后，配置下php.ini文件，假设hi-nginx将安装在/usr/local
-```
-
-include_path = ".:/usr/local/nginx/php"
-
-```
-如果hi-nginx将安装在其他地方，需要相应地修改下上面的值。
-
-如果有必要，还需把libphp7.so所在的路径添加到`/etc/ld.so.conf.d/php.conf`中。
 
 ## 关于java支持
 java版本不低于 8。

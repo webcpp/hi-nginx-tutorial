@@ -82,15 +82,6 @@ server {
 		    hi_kvdb_expires 5m;
 		    hi_java_servlet hi/jdemo;	
         }
-
-
-        if ( $app_t = php ) {
-            rewrite ^/(.*)\.php$ /$1 break;
-            hi_need_kvdb off;
-		    hi_kvdb_size 50;
-		    hi_kvdb_expires 5m;
-            hi_php_script php/index.php;
-        }
         
     }
 

@@ -87,19 +87,11 @@ hi_res:content("hello,world")
 - cache
 
 
-## php 接口
-
-php有神奇的array类型，所以，除了字符串，一切都是它了。
-
-具体实现参考hi-nginx安装目录下的`php/hi`。
-
-
 
 
 
 # 附注
 
-- 对于php使用者，强烈推荐采用引入`hi/route.php`并采用单一入口模式。
 - 对于python使用者，强烈推荐采用[hi.py框架](https://github.com/webcpp/hi.py),它实现单一入口模式，并提供一个类似flask或bottle的框架，但比两者都要快的多。最佳使用方法，请务必参考[hi.py框架例子](https://github.com/webcpp/pyexample)
 - 在hi-nginx强劲的缓存机制下，没有什么慢脚本是不能大幅度提速的。
 
