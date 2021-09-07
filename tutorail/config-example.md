@@ -10,6 +10,7 @@ server {
 	userid_name SESSIONID;
 	userid_domain localhost;
 	userid_path /;
+    userid_expires 1h;
 
     client_max_body_size 100k;
 
@@ -24,7 +25,6 @@ server {
     hi_need_headers off;
     hi_need_cookies off;
     hi_need_session off;
-    hi_session_expires 300s;
     hi_java_classpath "-Djava.class.path=.:/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar:/usr/lib/groovy/lib:/usr/lib/groovy/indy:/usr/lib/groovy/indy/groovy-3.0.6-indy.jar:/usr/lib/groovy/indy/groovy-jsr223-3.0.6-indy.jar";
     hi_java_options "-server -d64 -Dnashorn.args=--global-per-engine";
     hi_java_servlet_cache_expires 300s;
@@ -48,7 +48,6 @@ server {
 		hi_cache_expires 5s;
 		hi_need_cookies off;
 		hi_need_session off;
-		hi_session_expires 300s;
         hi_need_headers off;
         
         set $app_t $1;

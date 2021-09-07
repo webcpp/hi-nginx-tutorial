@@ -120,14 +120,6 @@
         hi_need_session on|off;
 ```
 
-- directives : content: http,srv,loc,if in loc ,if in srv
-    - hi_session_expires,default: 300s
-
-    example:
-
-```nginx
-        hi_session_expires 300s;
-```
      
 
 - directives : content: loc,if in loc
