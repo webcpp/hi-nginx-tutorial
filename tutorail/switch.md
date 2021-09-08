@@ -77,8 +77,8 @@
     userid_name SESSIONID;
     userid_domain localhost;
     userid_path /;
+    user_expires 5m;
     hi_need_session on|off;
-    hi_session_expires 300s;
 
 ```
 这个开关负责开启或者关闭会话机制。该机制需配合nginx内置的userid模块和redis服务器协调使用。请注意，`userid_name`必须是`SESSIONID`。

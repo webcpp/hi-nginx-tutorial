@@ -54,7 +54,8 @@ server {
         
         if ( $app_t = cpp ) {
             rewrite ^/(.*)\.cpp$ /$1 break;
-            hi cpp/hipp.so;
+            hi cpp/hipp.so; delete hi_session_expires directive
+
         }
 
         if ( $app_t = lua ) {
