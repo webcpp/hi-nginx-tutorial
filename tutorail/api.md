@@ -8,7 +8,10 @@
 
 cpp接口基于STL实现，非常容易操作，不多说了。如果还不熟悉STL，赶紧看下；主要是`std::string`,`std::unordered_map<std::string, std::string>`和`std::unordered_multimap<std::string, std::string>`。是不是太简单？
 
-具体实现参考hi-nginx安装目录下的`include`。
+具体实现参考hi-nginx安装目录下的以下三个文件：
+- `module/lib/request.hpp`
+- `module/lib/response.hpp`
+- `module/lib/servlet.hpp`
 
 
 ## java 接口
@@ -21,14 +24,14 @@ java接口也非常简单，包括`String`,`HashMap<String, String>`和`HashMap<
 
 这两种语言的接口符号名是一致的：
 
-`hi_req`和`hi_res`是两个嵌入的对象实例，由hi-nginx管理其生命期。它们提供统一的方法来操控http协议:
-
-### hi_req
+### request
+#### 属性
 - uri
 - method
 - client
 - param
 - user_agent
+#### 方法 
 - has_header
 - get_header
 - has_form
@@ -39,62 +42,25 @@ java接口也非常简单，包括`String`,`HashMap<String, String>`和`HashMap<
 - get_cookie
 - has_cache
 - get_cache
-### hi_res
+### response
+#### 属性
 - status
 - content
-- header
-- session
-- cache
-
-因为python(以及duktape)和lua使用对象方法的语法略有差异，前者使用`.`，后者使用`:`，所以在python中写
-
-```python
-hi_res.status(200)
-hi_res.content("hello,world")
-
-```
-
-在lua中则要写作:
-
-```lua
-hi_res:status(200)
-hi_res:content("hello,world")
-
-```
-
-## quickjs 接口
-把python和lua的请求和响应接口合并在一起了。
-### hi
-- uri
-- method
-- client
-- param
-- user_agent
-- has_header
-- get_header
-- has_form
-- get_form
-- has_session
-- get_session
-- has_cookie
-- get_cookie
-- has_cache
-- get_cache
-- status
-- content
-- header
-- session
-- cache
-
-
-
+#### 方法
+- set_header
+- set_session
+- set_cache
 
 
 # 附注
 
-- 对于python使用者，强烈推荐采用[hi.py框架](https://github.com/webcpp/hi.py),它实现单一入口模式，并提供一个类似flask或bottle的框架，但比两者都要快的多。最佳使用方法，请务必参考[hi.py框架例子](https://github.com/webcpp/pyexample)
-- 在hi-nginx强劲的缓存机制下，没有什么慢脚本是不能大幅度提速的。
+新版hi-nginx暂停了会话和缓存机制。请暂停以下6个方法的使用。
+- has_session
+- has_cache
+- get_session
+- get_cache
+- set_cache
+- set_session
 
-[hi-nginx-demo](https://github.com/webcpp/hi-nginx-demo)提供各种语言的演示开发方法，敬请参考。
 
 

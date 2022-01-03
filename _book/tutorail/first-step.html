@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="hi-project.html" />
+    <link rel="next" href="form.html" />
     
     
     <link rel="prev" href="config-example.html" />
@@ -115,34 +115,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="usage.html">
-            
-                <a href="usage.html">
-            
-                    
-                    使用
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="config.html">
-            
-                <a href="config.html">
-            
-                    
-                    配置命令
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="config-example.html">
+        <li class="chapter " data-level="1.3" data-path="config-example.html">
             
                 <a href="config-example.html">
             
@@ -155,7 +128,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.3" data-path="first-step.html">
+        <li class="chapter active" data-level="1.4" data-path="first-step.html">
             
                 <a href="first-step.html">
             
@@ -168,33 +141,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="hi-project.html">
-            
-                <a href="hi-project.html">
-            
-                    
-                    hi-project
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="switch.html">
-            
-                <a href="switch.html">
-            
-                    
-                    开关
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="form.html">
+        <li class="chapter " data-level="1.5" data-path="form.html">
             
                 <a href="form.html">
             
@@ -207,7 +154,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.7" data-path="api.html">
+        <li class="chapter " data-level="1.6" data-path="api.html">
             
                 <a href="api.html">
             
@@ -220,20 +167,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.8" data-path="subrequest.html">
-            
-                <a href="subrequest.html">
-            
-                    
-                    子请求
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.9" data-path="safe.html">
+        <li class="chapter " data-level="1.7" data-path="safe.html">
             
                 <a href="safe.html">
             
@@ -243,11 +177,6 @@
                 </a>
             
 
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -297,136 +226,49 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x8D77;&#x6B65;">&#x8D77;&#x6B65;</h1>
+<p>&#x65B0;&#x7248;hi-nginx&#x7EDF;&#x4E00;&#x91C7;&#x7528;uri&#x6620;&#x5C04;&#x6A21;&#x5757;&#x7684;&#x65B9;&#x5F0F;&#x52A0;&#x8F7D;&#x5E94;&#x7528;&#x3002;</p>
+<p>&#x5BF9;cpp&#x800C;&#x8A00;&#xFF0C;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x6A21;&#x5757;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x52A8;&#x6001;&#x5E93;(*.so)&#xFF1B;&#x5BF9;python&#x800C;&#x8A00;&#xFF0C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;python&#x6A21;&#x5757;; &#x5BF9;lua&#x800C;&#x8A00;&#xFF0C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;lua&#x6A21;&#x5757;&#x3002;</p>
 <h2 id="cpp">cpp</h2>
-<pre><code class="lang-cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;servlet.hpp&quot;</span></span>
-<span class="hljs-keyword">namespace</span> hi{
-<span class="hljs-keyword">class</span> index : <span class="hljs-keyword">public</span> servlet {
-    <span class="hljs-keyword">public</span>:
+<pre><code class="lang-cpp">
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;servlet.hpp&quot;</span></span>
 
-        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handler</span><span class="hljs-params">(request&amp; req, response&amp; res)</span> </span>{
-            res.headers.find(<span class="hljs-string">&quot;Content-Type&quot;</span>)-&gt;second = <span class="hljs-string">&quot;text/plain;charset=UTF-8&quot;</span>;
-            res.content = <span class="hljs-string">&quot;hello,world&quot;</span>;
+<span class="hljs-keyword">namespace</span> hi {
+<span class="hljs-keyword">class</span> test : <span class="hljs-keyword">public</span> servlet{
+    <span class="hljs-keyword">public</span>:
+        test()=<span class="hljs-keyword">default</span>;
+        <span class="hljs-keyword">virtual</span>~test()=<span class="hljs-keyword">default</span>;
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handler</span><span class="hljs-params">(<span class="hljs-keyword">const</span> request&amp; req,response&amp; res)</span>
+        </span>{
+            res.set_header(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;text/plain;charset=UTF-8&quot;</span>);
+            res.content = <span class="hljs-string">&quot;welcome to cpp\n&quot;</span>;
             res.status = <span class="hljs-number">200</span>;
         }
+};
 
-    };
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+   <span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> {
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-function">servlet* <span class="hljs-title">create</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> test();
 }
 
-<span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> hi::<span class="hljs-function">servlet* <span class="hljs-title">create</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> hi::index();
-}
-
-<span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">(hi::servlet* p)</span> </span>{
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">destroy</span><span class="hljs-params">(servlet* p)</span> </span>{
     <span class="hljs-keyword">delete</span> p;
 }
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+   }
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
 </code></pre>
 <h2 id="java">java</h2>
-<pre><code class="lang-java"><span class="hljs-keyword">package</span> hi;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">index</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">hi</span>.<span class="hljs-title">servlet</span> </span>{
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">index</span><span class="hljs-params">()</span> </span>{
-
-    }
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handler</span><span class="hljs-params">(hi.request req, hi.response res)</span> </span>{
-        res.set_content_type(<span class="hljs-string">&quot;text/plain;charset=UTF-8&quot;</span>);
-        res.status = <span class="hljs-number">200</span>;
-        res.content = <span class="hljs-string">&quot;hello,world&quot;</span>;
-
-    }
-}
-</code></pre>
-<p>&#x656C;&#x8BF7;&#x53C2;&#x8003;<a href="https://github.com/webcpp/jdemo" target="_blank">https://github.com/webcpp/jdemo</a>&#x3002;</p>
-<p>&#x60F3;&#x5199;&#x5F97;&#x66F4;&#x5FEB;&#xFF0C;&#x5C31;&#x5B89;&#x88C5;groovy&#x3002;&#x7528;groovy&#x811A;&#x672C;&#x5199;&#x597D;&#xFF0C;&#x518D;&#x7F16;&#x8BD1;&#x4E3A;.class&#x4F5C;&#x4E3A;java&#x8FD0;&#x884C;&#x3002;&#x5982;&#x6B64;&#xFF0C;&#x53EF;&#x8C13;&#x5F00;&#x53D1;&#x3001;&#x8FD0;&#x884C;&#x4E24;&#x8005;&#x5F97;&#x517C;&#x3002;</p>
-<p>&#x6240;&#x6709;.class&#x53EF;&#x6253;&#x5305;&#x6210;jar&#x6587;&#x4EF6;&#xFF0C;&#x901A;&#x8FC7;<code>hi_java_classpath</code>&#x547D;&#x4EE4;&#x5F15;&#x5165;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;<code>hi_java_servlet</code>&#x8C03;&#x7528;&#x9700;&#x8981;&#x7684;<code>servlet</code>&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x3002;&#x66F4;&#x65B0;&#x65F6;&#xFF0C;&#x53EA;&#x9700;<code>reload</code>&#x6216;&#x8005;<code>restart</code>&#x5373;&#x53EF;&#x3002;</p>
-<p>hi-nginx-java&#x63D0;&#x4F9B;&#x4E0D;&#x540C;&#x4E8E;java&#x5B98;&#x65B9;<code>servlet</code>&#x7684;&#x5168;&#x65B0;&#x7684;java web&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x2014;&#x2014;&#x5B83;&#x76F4;&#x63A5;&#x628A;nginx&#x8F6C;&#x53D8;&#x4E3A;<code>servlet</code>&#x5BB9;&#x5668;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
-<p>hi-nginx-java&#x8FD8;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x8DEF;&#x7531;&#x7EC4;&#x4EF6;&#xFF0C;&#x4E5F;&#x53EF;&#x53C2;&#x8003;<a href="https://github.com/webcpp/jdemo" target="_blank">https://github.com/webcpp/jdemo</a>&#x3002;</p>
+<p>&#x8BF7;&#x53C2;&#x8003;<a href="https://hi-nginx-java.hi-nginx.com/index.html" target="_blank">hi-nginx-java</a></p>
 <h2 id="python">python</h2>
-<pre><code class="lang-python">data=<span class="hljs-string">&apos;{client},{method},{uri},{user_agent},{param}&apos;</span>.format(client=hi_req.client(),method=hi_req.method(),uri=hi_req.uri(),user_agent=hi_req.user_agent(),param=hi_req.param())
-hi_res.header(<span class="hljs-string">&apos;Content-Type&apos;</span>,<span class="hljs-string">&apos;text/plain;charset=UTF-8&apos;</span>)
-hi_res.content(data)
-hi_res.status(<span class="hljs-number">200</span>)
-</code></pre>
-<p>&#x6216;&#x8005;&#x4F7F;&#x7528;hi.py&#x6846;&#x67B6;&#xFF1A;</p>
-<pre><code class="lang-python"><span class="hljs-keyword">from</span> hi <span class="hljs-keyword">import</span> hi
-app =hi()
-
-<span class="hljs-meta">@app.route(r&apos;^/test/?$&apos;,[&apos;GET&apos;,&apos;POST&apos;])</span>
-<span class="hljs-meta">@app.route(r&quot;^/$&quot;,[&apos;GET&apos;])</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">(req,res,param)</span>:</span>
-    res.header(<span class="hljs-string">&apos;Content-Type&apos;</span>,<span class="hljs-string">&apos;text/plain;charset=utf-8&apos;</span>)
-    res.content(<span class="hljs-string">&apos;hello,world&apos;</span>)
-    res.status(<span class="hljs-number">200</span>)
-
-<span class="hljs-meta">@app.route(r&quot;^/client/?$&quot;,[&apos;GET&apos;,&apos;POST&apos;])</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">client</span><span class="hljs-params">(req,res,param)</span>:</span>
-    res.content(<span class="hljs-string">&apos;{}&lt;br&gt;{}&lt;br&gt;{}&lt;br&gt;{}&lt;br&gt;{}&apos;</span>.format(req.client(),req.method(),req.uri(),req.user_agent(),req.param()))
-    res.status(<span class="hljs-number">200</span>)
-
-<span class="hljs-meta">@app.route(r&quot;^/hello/(?P&lt;who&gt;\w+)?$&quot;,[&apos;GET&apos;])</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span><span class="hljs-params">(req,res,param)</span>:</span>
-    res.content(<span class="hljs-string">&apos;{}={}&apos;</span>.format(<span class="hljs-string">&apos;who&apos;</span>,param[<span class="hljs-string">&apos;who&apos;</span>]))
-    res.status(<span class="hljs-number">200</span>)
-
-
-
-<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
-    app.run(hi_req,hi_res)
-</code></pre>
+<p>&#x65B0;&#x7248;hi-nginx&#x6539;&#x8FDB;&#x4E86;python&#x6A21;&#x5757;&#x7684;&#x52A0;&#x8F7D;&#x65B9;&#x5F0F;&#x3002;&#x76F4;&#x63A5;&#x67B6;&#x6784;&#x5728;python&#x8BED;&#x8A00;&#x672C;&#x8EAB;&#x7684;&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x673A;&#x5236;&#x4E4B;&#x4E0A;&#x3002;
+&#x53C2;&#x8003;<code>app/python</code>&#x3002;</p>
 <h2 id="lua">lua</h2>
-<pre><code class="lang-lua"><span class="hljs-keyword">local</span> data=<span class="hljs-built_in">string</span>.format(<span class="hljs-string">&apos;%s,%s,%s,%s,%s&apos;</span>,hi_req:client(),hi_req:method(),hi_req:uri(),hi_req:user_agent(),hi_req:param())
-hi_res:header(<span class="hljs-string">&apos;Content-Type&apos;</span>,<span class="hljs-string">&apos;text/plain;charset=UTF-8&apos;</span>)
-hi_res:content(data)
-hi_res:status(<span class="hljs-number">200</span>)
-</code></pre>
-<h2 id="php">php</h2>
-<pre><code class="lang-php"><span class="hljs-keyword">require_once</span> <span class="hljs-string">&apos;hi/servlet.php&apos;</span>;
-<span class="hljs-keyword">require_once</span> <span class="hljs-string">&apos;hi/route.php&apos;</span>;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">index</span> <span class="hljs-keyword">implements</span> \<span class="hljs-title">hi</span>\<span class="hljs-title">servlet</span> </span>{
-
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span><span class="hljs-params">(\hi\request $req, \hi\response $res)</span> </span>{
-        $app = \hi\route::get_instance();
-        $app-&gt;add(<span class="hljs-string">&apos;{^/$}&apos;</span>, <span class="hljs-keyword">array</span>(<span class="hljs-string">&apos;GET&apos;</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($rq, $rs, &amp;$param)</span> </span>{
-            $rs-&gt;content = <span class="hljs-string">&apos;hello,world&apos;</span>;
-            $rs-&gt;status = <span class="hljs-number">200</span>;
-        });
-
-        $app-&gt;add(<span class="hljs-string">&apos;{^/who/(?P&lt;name&gt;\w+)/?$}&apos;</span>, <span class="hljs-keyword">array</span>(<span class="hljs-string">&apos;GET&apos;</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($rq, $rs, &amp;$param)</span> </span>{
-            $rs-&gt;content = <span class="hljs-string">&apos;hello,&apos;</span>.$param[<span class="hljs-string">&apos;name&apos;</span>];
-            $rs-&gt;status = <span class="hljs-number">200</span>;
-        });
-
-        $app-&gt;add(<span class="hljs-string">&apos;{^/phpinfo/?$}&apos;</span>, <span class="hljs-keyword">array</span>(<span class="hljs-string">&apos;GET&apos;</span>), <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($rq, $rs, &amp;$param)</span> </span>{
-            ob_start();
-            phpinfo();
-            $rs-&gt;content = ob_get_contents();
-            $rs-&gt;status = <span class="hljs-number">200</span>;
-            ob_end_clean();
-        });
-
-        $app-&gt;add(<span class="hljs-string">&apos;{^/cache/?$}&apos;</span>, <span class="hljs-keyword">array</span>(<span class="hljs-string">&apos;GET&apos;</span>), <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($rq, $rs, &amp;$param)</span> </span>{
-            $key = <span class="hljs-string">&apos;cache_test&apos;</span>;
-            $value = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">if</span> (array_key_exists($key, $rq-&gt;cache)) {
-                $value = intval($rq-&gt;cache[$key]) + <span class="hljs-number">1</span>;
-            }
-            $rs-&gt;cache[$key] = $value;
-            $rs-&gt;content = <span class="hljs-string">&quot;$key : &quot;</span> . $value;
-            $rs-&gt;status = <span class="hljs-number">200</span>;
-        });
-        $app-&gt;run($req, $res);
-    }
-
-}
-</code></pre>
-<h2 id="quickjs">quickjs</h2>
-<pre><code class="lang-javascipt">import * as hi from &quot;hi&quot;;
-hi.header(&apos;Content-Type&apos;,&apos;text/plain;charset=UTF-8&apos;)
-hi.content(&apos;hello,world&apos;)
-hi.status(200)
-</code></pre>
+<p>&#x65B0;&#x7248;hi-nginx&#x6539;&#x8FDB;&#x4E86;lua&#x6A21;&#x5757;&#x7684;&#x52A0;&#x8F7D;&#x65B9;&#x5F0F;&#x3002;&#x76F4;&#x63A5;&#x67B6;&#x6784;&#x5728;lua&#x8BED;&#x8A00;&#x672C;&#x8EAB;&#x7684;&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x673A;&#x5236;&#x4E4B;&#x4E0A;&#x3002;
+&#x53C2;&#x8003;<code>app/lua</code>&#x3002;</p>
 
                                 
                                 </section>
@@ -459,7 +301,7 @@ hi.status(200)
                 </a>
                 
                 
-                <a href="hi-project.html" class="navigation navigation-next " aria-label="Next page: hi-project">
+                <a href="form.html" class="navigation navigation-next " aria-label="Next page: 表单">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -470,7 +312,7 @@ hi.status(200)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"起步","level":"1.3.3","depth":2,"next":{"title":"hi-project","level":"1.3.4","depth":2,"path":"tutorail/hi-project.md","ref":"tutorail/hi-project.md","articles":[]},"previous":{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/first-step.md","mtime":"2021-01-31T14:55:10.905Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-08T00:08:26.786Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"起步","level":"1.4","depth":1,"next":{"title":"表单","level":"1.5","depth":1,"path":"tutorail/form.md","ref":"tutorail/form.md","articles":[]},"previous":{"title":"配置例子","level":"1.3","depth":1,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/first-step.md","mtime":"2022-01-03T03:11:47.907Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-03T03:53:31.475Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

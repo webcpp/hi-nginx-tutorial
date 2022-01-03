@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="usage.html" />
+    <link rel="next" href="config-example.html" />
     
     
     <link rel="prev" href="../" />
@@ -115,34 +115,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="usage.html">
-            
-                <a href="usage.html">
-            
-                    
-                    使用
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="config.html">
-            
-                <a href="config.html">
-            
-                    
-                    配置命令
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="config-example.html">
+        <li class="chapter " data-level="1.3" data-path="config-example.html">
             
                 <a href="config-example.html">
             
@@ -155,7 +128,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="first-step.html">
+        <li class="chapter " data-level="1.4" data-path="first-step.html">
             
                 <a href="first-step.html">
             
@@ -168,33 +141,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="hi-project.html">
-            
-                <a href="hi-project.html">
-            
-                    
-                    hi-project
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="switch.html">
-            
-                <a href="switch.html">
-            
-                    
-                    开关
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="form.html">
+        <li class="chapter " data-level="1.5" data-path="form.html">
             
                 <a href="form.html">
             
@@ -207,7 +154,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.7" data-path="api.html">
+        <li class="chapter " data-level="1.6" data-path="api.html">
             
                 <a href="api.html">
             
@@ -220,20 +167,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.8" data-path="subrequest.html">
-            
-                <a href="subrequest.html">
-            
-                    
-                    子请求
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.9" data-path="safe.html">
+        <li class="chapter " data-level="1.7" data-path="safe.html">
             
                 <a href="safe.html">
             
@@ -243,11 +177,6 @@
                 </a>
             
 
-            
-        </li>
-    
-
-            </ul>
             
         </li>
     
@@ -298,55 +227,68 @@
                                 
                                 <h1 id="&#x5B89;&#x88C5;">&#x5B89;&#x88C5;</h1>
 <h2 id="&#x4E00;&#x822C;&#x8BF4;&#x660E;">&#x4E00;&#x822C;&#x8BF4;&#x660E;</h2>
-<p>&#x5B89;&#x88C5;hi-nginx&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5C31;&#x662F;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;nginx&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x53EA;&#x662F;&#x591A;&#x4E2A;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9009;&#x9879;&#xFF1A;</p>
-<pre><code>                --enable-http-hi-cpp=YES                            \
-                --enable-http-hi-python=YES                         \
-                --enable-http-hi-lua=YES                            \
-                --enable-http-hi-qjs=YES                            \
-                --enable-http-hi-java=YES                           \
-                --with-http-hi-python-version=python3               \
-                --with-http-hi-lua-version=lua5.3                   \
-                --add-module=module/ngx_http_hi_module              \
-                --add-module=module/ngx_autoblacklist_module
-</code></pre><p>&#x9664;c++&#x5916;&#xFF0C;&#x5747;&#x4E3A;&#x53EF;&#x9009;&#x7684;&#x3002;&#x6240;&#x6709;&#x8BED;&#x8A00;&#x652F;&#x6301;&#x5747;&#x7531;&#x6A21;&#x5757;ngx_http_hi_module&#x63D0;&#x4F9B;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5FC5;&#x987B;&#x901A;&#x8FC7;--add-module&#x6DFB;&#x52A0;&#x8BE5;&#x6A21;&#x5757;&#x3002;</p>
-<p>&#x4E0D;&#x9700;&#x8981;&#x54EA;&#x79CD;&#x8BED;&#x8A00;&#xFF0C;&#x5C31;&#x628A;&#x76F8;&#x5173;enable&#x9879;&#x8BBE;&#x7F6E;&#x4E3A;NO&#x3002;</p>
+<p>&#x5B89;&#x88C5;hi-nginx&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0E;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;nginx&#x4E00;&#x822C;&#x6A21;&#x5757;&#x7684;&#x65B9;&#x5F0F;&#x65E0;&#x5F02;&#x3002;&#x53EA;&#x662F;&#x591A;&#x4E2A;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9009;&#x9879;&#xFF1A;</p>
+<pre><code>--add-module=module/ngx_http_autoblacklist_module   \
+--with-http-hi-lua-version=lua5.3                   \
+--add-module=module/ngx_http_lua_module             \
+--with-http-hi-python-version=python-3.8-embed      \
+--add-module=module/ngx_http_py_module              \
+--add-module=module/ngx_http_java_module            \
+--add-module=module/ngx_http_cpp_module
+</code></pre><p>&#x6BCF;&#x4E2A;&#x6A21;&#x5757;&#x90FD;&#x662F;&#x72EC;&#x7ACB;&#x7684;&#xFF0C;&#x53EF;&#x6309;&#x9700;&#x5B89;&#x88C5;&#x3002;</p>
 <p>&#x540C;&#x65F6;&#xFF0C;&#x5BF9;&#x4E8E;lua&#x548C;python&#x6765;&#x8BF4;&#xFF0C;&#x5B83;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x652F;&#x6301;&#x7684;&#x7248;&#x672C;&#x3002;&#x5BF9;lua&#x800C;&#x8A00;&#xFF0C;&#x53EF;&#x9009;lua&#xFF0C;lua5.x&#x6216;&#x8005;luajit&#x3002;&#x5BF9;python&#x800C;&#x8A00;&#xFF0C;&#x53EF;&#x9009;python2&#x6216;&#x8005;python3&#x3002;</p>
 <h2 id="&#x4F9D;&#x8D56;">&#x4F9D;&#x8D56;</h2>
-<ul>
-<li>linux&#xFF0C;hi-nginx&#x6682;&#x4E0D;&#x652F;&#x6301;windows&#x7CFB;&#x7EDF;</li>
-<li>gcc &#x548C; g++(c++11) &#x6216;&#x8005; clang &#x548C; clang++</li>
-<li>python-devel,&#x5982;&#x679C; <code>--enable-http-hi-python=YES</code> &#x5E76;&#x4E14; <code>with-http-hi-python-version=python2</code></li>
-<li>python3.x-devel &#x5982;&#x679C; <code>--enable-http-hi-python=YES</code> &#x5E76;&#x4E14; <code>with-http-hi-python-version=python3</code></li>
-<li>lua-devel(lua5.1,5.2,5.3),&#x5982;&#x679C; <code>--enable-http-hi-lua=YES</code>  &#x5E76;&#x4E14; <code>--with-http-hi-lua-version=lua5.x</code></li>
-<li>luajit-devel,&#x5982;&#x679C; <code>--enable-http-hi-lua=YES</code> &#x5E76;&#x4E14; <code>--with-http-hi-lua-version=luajit</code></li>
-<li>jdk8+,&#x5982;&#x679C; <code>--enable-http-hi-java=YES</code></li>
-</ul>
-<h2 id="systemctl">systemctl</h2>
-<p>&#x5B89;&#x88C5;&#x540E;&#xFF0C;<code>systemctl enable nginx</code>&#x548C;<code>systemctl start nginx</code>&#x3002;</p>
-<p>&#x8FD9;&#x662F;&#x4FDD;&#x8BC1;&#x542F;&#x52A8;&#x76EE;&#x5F55;&#x6B63;&#x786E;&#xFF0C;&#x4ECE;&#x800C;&#x914D;&#x7F6E;&#x65F6;&#x4FDD;&#x8BC1;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x6709;&#x6548;&#x7684;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
-<h2 id="&#x5173;&#x4E8E;java&#x652F;&#x6301;">&#x5173;&#x4E8E;java&#x652F;&#x6301;</h2>
-<p>java&#x7248;&#x672C;&#x4E0D;&#x4F4E;&#x4E8E; 8&#x3002;</p>
-<p>&#x6700;&#x7B80;&#x5355;&#x65B9;&#x6CD5;&#x662F;&#x76F4;&#x63A5;&#x5B89;&#x88C5;openjdk&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x6015;&#x9EBB;&#x70E6;&#xFF0C;&#x7528;oracle&#x7684;&#x4E5F;&#x53EF;&#x4EE5;&#x7684;&#x3002;&#x4ECE;<a href="http://jdk.java.net/" target="_blank">http://jdk.java.net/</a>&#x4E0B;&#x8F7D;openjdk&#x5B89;&#x88C5;&#x5305;&#xFF0C;&#x89E3;&#x538B;&#xFF0C;&#x5B89;&#x88C5;&#x81F3;<code>/usr/lib/jvm</code>&#x76EE;&#x5F55;&#x4E0B;&#xFF1B;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;<code>default-java</code>&#x5F97;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x6307;&#x5411;openjdk&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x5373;&#x53EF;&#x3002;&#x5173;&#x952E;&#x662F;&#x8BBE;&#x7F6E;$JAVA_HOME&#x548C;java&#x641C;&#x7D22;&#x8DEF;&#x5F84;&#xFF0C;&#x5426;&#x5219;&#x7F16;&#x8BD1;hi-nginx&#x65F6;&#x65E0;&#x6CD5;&#x627E;&#x5230;&#x76F8;&#x5173;java&#x5E93;&#x548C;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x8FD0;&#x884C;&#x65F6;&#x4F1A;&#x65E0;&#x6CD5;&#x52A0;&#x8F7D;libjvm.so&#x3002;&#x63A8;&#x8350;&#x7684;&#x65B9;&#x6848;&#xFF1A;</p>
-<pre><code class="lang-txt">#cat /etc/ld.so.conf.d/jdk.conf 
-/usr/lib/jvm/default-java/lib/server
+<h3 id="cc&#x57FA;&#x7840;&#x73AF;&#x5883;">c/c++&#x57FA;&#x7840;&#x73AF;&#x5883;</h3>
+<h4 id="ubuntu">Ubuntu</h4>
+<pre><code class="lang-shell">apt-get install build-essential
+apt-get install zlib1g-dev
+apt-get install libssl-dev
+</code></pre>
+<h4 id="centos">centos</h4>
+<pre><code class="lang-shell">yum install gcc gcc-c++ make
+yum install zlib-devel
+yum install openssl-devel
+</code></pre>
+<h3 id="java-&#x5F00;&#x53D1;&#x73AF;&#x5883;">java &#x5F00;&#x53D1;&#x73AF;&#x5883;</h3>
+<p>&#x4ECE;<a href="http://jdk.java.net/" target="_blank">http://jdk.java.net/</a>&#x4E0B;&#x8F7D;&#x9700;&#x8981;&#x7684;openjdk&#xFF0C;&#x81F3;&#x5C11;java 8 &#x7248;&#x672C;&#xFF0C;&#x63A8;&#x8350; java 11+&#x3002;</p>
+<p>&#x89E3;&#x538B;&#x7F29;&#x4E0B;&#x8F7D;&#x7684;&#x5B89;&#x88C5;&#x5305;&#x3002;&#x5C06;&#x89E3;&#x538B;&#x51FA;&#x6765;&#x7684;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x6574;&#x4E2A;&#x79FB;&#x52A8;&#x81F3; <code>/usr/lib/jvm/</code> &#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p>&#x7528; <code>ln -s</code> &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x540D;&#x4E3A; <code>default-java</code> &#xFF0C;&#x6307;&#x5411;&#x4E0A;&#x4E00;&#x6B65;jdk&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x521B;&#x5EFA; <code>/etc/ld.so.conf.d/jdk.conf</code> &#x6587;&#x4EF6;&#xFF0C;&#x5185;&#x5BB9;&#x4E09;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-txt">/usr/lib/jvm/default-java/lib/server
 /usr/lib/jvm/default-java/lib
 /usr/lib/jvm/default-java/jre/lib/amd64/server
-
-
-#cat /etc/profile.d/jdk.sh
-export JAVA_HOME=/usr/lib/jvm/default-java
-export CLASSPATH=/usr/local/nginx/java:/usr/local/nginx/java/hi-nginx-java.jar
+</code></pre>
+<p>&#x8FD0;&#x884C; <code>sudo ldconfig</code> &#x547D;&#x4EE4;&#xFF0C;&#x4FDD;&#x8BC1; <code>libjvm.so</code> &#x80FD;&#x88AB;hi-nginx&#x627E;&#x5230;&#x3002;</p>
+<p>&#x521B;&#x5EFA; <code>/etc/profile.d/jdk.sh</code> &#x6587;&#x4EF6;&#xFF0C;&#x5185;&#x5BB9;&#x4E09;&#x884C;:</p>
+<pre><code class="lang-txt">export JAVA_HOME=/usr/lib/jvm/default-java
+export CLASSPATH=/usr/local/nginx/app/java:/usr/local/nginx/app/java/hi-nginx-java.jar
 export PATH=$JAVA_HOME/bin:$PATH
 </code></pre>
-<p>&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;jdk&#x7248;&#x672C;&#x548C;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#xFF0C;&#x4FEE;&#x6539;&#x5176;&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x9879;&#x5373;&#x53EF;&#x3002;&#x6CE8;&#x610F;&#x5176;&#x4E2D;<code>/usr/lib/jvm/default-java/jre/lib/amd64/server</code>&#x9879;&#x5C31;&#x662F;&#x7279;&#x522B;&#x9488;&#x5BF9;java8&#x7684;&#x5B89;&#x6392;&#x3002;</p>
-<p>&#x8BB0;&#x5F97;<code>sudo ldconfig</code>&#x3002;</p>
-<h2 id="&#x5173;&#x4E8E;quickjs&#x652F;&#x6301;">&#x5173;&#x4E8E;quickjs&#x652F;&#x6301;</h2>
-<p>&#x539F;&#x6765;v2.0.3&#x4E4B;&#x524D;&#x6709;&#x4E2A;&#x57FA;&#x4E8E;duktape&#x5F15;&#x64CE;&#x7684;&#x65B9;&#x6848;&#x3002;&#x81EA;v2.0.3&#x5F00;&#x59CB;&#xFF0C;&#x66FF;&#x6362;&#x4E3A;&#x73B0;&#x5728;&#x7684;&#x65B9;&#x6848;&#x3002;
-&#x8BE5;&#x65B9;&#x6848;&#x57FA;&#x4E8E;&#x5F00;&#x6E90;javascript&#x5F15;&#x64CE;quickjs&#x3002;&#x5982;&#x679C;&#x719F;&#x6089;&#x8BE5;&#x5F15;&#x64CE;&#x7684;api&#xFF0C;&#x5F00;&#x53D1;C/C++&#x6269;&#x5C55;&#x662F;&#x5F88;&#x5BB9;&#x6613;&#x3002;&#x5177;&#x4F53;&#x53EF;&#x53C2;&#x8003;quickjs&#x5B98;&#x7F51;&#x4ECB;&#x7ECD;&#x3002;</p>
-<p>&#x9664;&#x4E86;quickjs&#x5B98;&#x7F51;&#x5185;&#x7F6E;&#x7684;&#x6A21;&#x5757;<code>os</code>,<code>std</code>,<code>bjson</code>&#xFF0C;&#x6211;&#x9644;&#x52A0;&#x4E86;&#x4E09;&#x4E2A;&#x529F;&#x80FD;&#x6A21;&#x5757;&#xFF1A;<code>hi</code>,<code>crypto</code>&#x548C;<code>hash</code>&#x3002;&#x5177;&#x4F53;&#x7528;&#x6CD5;&#x8BF7;&#x53C2;&#x8003;&#x5B89;&#x88C5;&#x6587;&#x4EF6;&#x5305;&#x91CC;&#x7684;<code>qjs</code>&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x8FD0;&#x884C;&#x547D;&#x4EE4; <code>source /etc/profile</code> &#x540E;&#xFF0C;&#x4E00;&#x822C;&#x53EF;&#x901A;&#x8FC7; <code>java -version</code> &#x547D;&#x4EE4;&#x9A8C;&#x8BC1;jdk&#x5B89;&#x88C5;&#x6210;&#x529F;&#x4E0E;&#x5426;&#x3002; </p>
+<h3 id="python-&#x73AF;&#x5883;">python &#x73AF;&#x5883;</h3>
+<h4 id="ubuntu">ubuntu</h4>
+<pre><code class="lang-shell">apt-get install python3-dev
+</code></pre>
+<h4 id="centos">centos</h4>
+<pre><code class="lang-shell">yum install  python3-devel
+</code></pre>
+<p>&#x786E;&#x4FDD; <code>pkg-config --cflags --libs $HTTP_HI_PYTHON_VERSION</code> &#x6B63;&#x786E;&#x6709;&#x6548;&#x3002;</p>
+<h3 id="lua-&#x73AF;&#x5883;">lua &#x73AF;&#x5883;</h3>
+<h4 id="ubuntu">ubuntu</h4>
+<pre><code class="lang-shell">apt-get install lua5.3
+apt-get install luarocks
+</code></pre>
+<h4 id="centos">centos</h4>
+<pre><code class="lang-shell">yum install lua5.3
+yum install luarocks
+</code></pre>
+<p>&#x786E;&#x4FDD; <code>pkg-config --cflags --libs $HTTP_HI_LUA_VERSION</code> &#x6B63;&#x786E;&#x6709;&#x6548;&#x3002;</p>
+<h2 id="systemctl">systemctl</h2>
+<p>&#x5B89;&#x88C5;&#x540E;&#xFF0C; <code>systemctl enable nginx</code> &#x548C; <code>systemctl start nginx</code> &#x3002;</p>
+<p>&#x8FD9;&#x662F;&#x4FDD;&#x8BC1;&#x542F;&#x52A8;&#x76EE;&#x5F55;&#x6B63;&#x786E;&#xFF0C;&#x4ECE;&#x800C;&#x914D;&#x7F6E;&#x65F6;&#x4FDD;&#x8BC1;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x6709;&#x6548;&#x7684;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
 <h2 id="&#x5173;&#x4E8E;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;">&#x5173;&#x4E8E;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;</h2>
-<p>hi-nginx&#x81EA;&#x5E26;&#x51E0;&#x4E2A;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#xFF0C;&#x5728;<code>3rd</code>&#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x8BDD;&#xFF0C;&#x7528;<code>--add-module=3rd/[module_name]</code>&#x6DFB;&#x52A0;&#x5230;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x4E2D;&#x5373;&#x53EF;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x4E0B;&#x8F7D;&#x9700;&#x8981;&#x7684;&#x6A21;&#x5757;&#x3002;&#x5176;&#x5B9E;&#xFF0C;&#x5F88;&#x591A;&#x5E38;&#x7528;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#x90FD;&#x53EF;&#x4EE5;&#x5728;<a href="https://github.com/alibaba/tengine/tree/master/modules" target="_blank">&#x8FD9;&#x91CC;</a>&#x548C;<a href="https://www.nginx.com/resources/wiki/modules/" target="_blank">&#x8FD9;&#x91CC;</a>&#x627E;&#x5230;&#x3002;&#x5404;&#x53D6;&#x6240;&#x9700;&#x5427;&#xFF0C;&#x5EFA;&#x8BAE;&#x7EDF;&#x4E00;&#x653E;&#x5728;<code>3rd</code>&#x76EE;&#x5F55;&#x4E2D;&#x2014;&#x2014;&#x51E1;nginx&#x80FD;&#x63A5;&#x53D7;&#x7684;&#xFF0C;hi-nginx&#x5FC5;&#x80FD;&#x63A5;&#x53D7;&#x3002;</p>
+<p>hi-nginx&#x81EA;&#x5E26;&#x51E0;&#x4E2A;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#xFF0C;&#x5728; <code>3rd</code> &#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x8BDD;&#xFF0C;&#x7528; <code>--add-module=3rd/[module_name]</code> &#x6DFB;&#x52A0;&#x5230;&#x7F16;&#x8BD1;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x4E2D;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x4E0B;&#x8F7D;&#x9700;&#x8981;&#x7684;&#x6A21;&#x5757;&#x3002;&#x5176;&#x5B9E;&#xFF0C;&#x5F88;&#x591A;&#x5E38;&#x7528;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x6A21;&#x5757;&#x90FD;&#x53EF;&#x4EE5;&#x5728;<a href="https://github.com/alibaba/tengine/tree/master/modules" target="_blank">&#x8FD9;&#x91CC;</a>&#x548C;<a href="https://www.nginx.com/resources/wiki/modules/" target="_blank">&#x8FD9;&#x91CC;</a>&#x627E;&#x5230;&#x3002;&#x5404;&#x53D6;&#x6240;&#x9700;&#x5427;&#xFF0C;&#x5EFA;&#x8BAE;&#x7EDF;&#x4E00;&#x653E;&#x5728; <code>3rd</code> &#x76EE;&#x5F55;&#x4E2D;&#x2014;&#x2014;&#x9002;&#x5408;nginx&#x7684;&#xFF0C;&#x4E5F;&#x5FC5;&#x5B9A;&#x9002;&#x5408;hi-nginx&#x3002;</p>
 
                                 
                                 </section>
@@ -379,7 +321,7 @@ export PATH=$JAVA_HOME/bin:$PATH
                 </a>
                 
                 
-                <a href="usage.html" class="navigation navigation-next " aria-label="Next page: 使用">
+                <a href="config-example.html" class="navigation navigation-next " aria-label="Next page: 配置例子">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -390,7 +332,7 @@ export PATH=$JAVA_HOME/bin:$PATH
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"安装","level":"1.2","depth":1,"next":{"title":"使用","level":"1.3","depth":1,"path":"tutorail/usage.md","ref":"tutorail/usage.md","articles":[{"title":"配置命令","level":"1.3.1","depth":2,"path":"tutorail/config.md","ref":"tutorail/config.md","articles":[]},{"title":"配置例子","level":"1.3.2","depth":2,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},{"title":"起步","level":"1.3.3","depth":2,"path":"tutorail/first-step.md","ref":"tutorail/first-step.md","articles":[]},{"title":"hi-project","level":"1.3.4","depth":2,"path":"tutorail/hi-project.md","ref":"tutorail/hi-project.md","articles":[]},{"title":"开关","level":"1.3.5","depth":2,"path":"tutorail/switch.md","ref":"tutorail/switch.md","articles":[]},{"title":"表单","level":"1.3.6","depth":2,"path":"tutorail/form.md","ref":"tutorail/form.md","articles":[]},{"title":"编程接口","level":"1.3.7","depth":2,"path":"tutorail/api.md","ref":"tutorail/api.md","articles":[]},{"title":"子请求","level":"1.3.8","depth":2,"path":"tutorail/subrequest.md","ref":"tutorail/subrequest.md","articles":[]},{"title":"安全","level":"1.3.9","depth":2,"path":"tutorail/safe.md","ref":"tutorail/safe.md","articles":[]}]},"previous":{"title":"hi-nginx 使用说明","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/install.md","mtime":"2021-03-09T14:55:55.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-08T00:08:26.786Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"安装","level":"1.2","depth":1,"next":{"title":"配置例子","level":"1.3","depth":1,"path":"tutorail/config-example.md","ref":"tutorail/config-example.md","articles":[]},"previous":{"title":"hi-nginx 使用说明","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/install.md","mtime":"2022-01-03T03:46:43.982Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-03T03:53:31.475Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
