@@ -8,7 +8,7 @@ server {
 	
     autoblacklist on;
     autoblacklist_size 1024;
-    autoblacklist_expires 86400s;
+    autoblacklist_expires 1d;
     autoblacklist_limit 30;
 
     location ~ \.cdp {
