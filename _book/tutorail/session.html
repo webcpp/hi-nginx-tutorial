@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>安全 · GitBook</title>
+        <title>会话 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="lru_cache.html" />
+    <link rel="next" href="api.html" />
     
     
-    <link rel="prev" href="api.html" />
+    <link rel="prev" href="form.html" />
     
 
     </head>
@@ -154,7 +154,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="session.html">
+        <li class="chapter active" data-level="1.6" data-path="session.html">
             
                 <a href="session.html">
             
@@ -180,7 +180,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="safe.html">
+        <li class="chapter " data-level="1.8" data-path="safe.html">
             
                 <a href="safe.html">
             
@@ -236,7 +236,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >安全</a>
+        <a href=".." >会话</a>
     </h1>
 </div>
 
@@ -251,14 +251,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5B89;&#x5168;">&#x5B89;&#x5168;</h1>
-<p>hi-nginx&#x81EA;&#x5E26;&#x4E00;&#x4E2A;&#x5B89;&#x5168;&#x6A21;&#x5757;:autoblacklist&#x3002;&#x8BE5;&#x6A21;&#x5757;&#x80FD;&#x52A8;&#x6001;&#x5730;&#x81EA;&#x5B9A;&#x4E49;IP&#x9ED1;&#x540D;&#x5355;&#x3002;</p>
-<h2 id="&#x4F7F;&#x7528;&#x65B9;&#x6CD5;">&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</h2>
-<pre><code class="lang-nginx">
-    <span class="hljs-attribute">autoblacklist</span> <span class="hljs-literal">on</span>|<span class="hljs-literal">off</span>;        <span class="hljs-comment">#&#x5F00;&#x5173;&#xFF0C;&#x9ED8;&#x8BA4;&#x5173;&#x95ED;</span>
-    <span class="hljs-attribute">autoblacklist_size</span> <span class="hljs-number">1024</span>;    <span class="hljs-comment">#&#x9ED1;&#x540D;&#x5355;&#x957F;&#x5EA6;&#xFF0C;&#x9ED8;&#x8BA4;1024</span>
-    <span class="hljs-attribute">autoblacklist_expires</span> <span class="hljs-number">1d</span>;    <span class="hljs-comment">#&#x6076;&#x610F;ip&#x5C01;&#x7981;&#x65F6;&#x957F;&#xFF0C;&#x9ED8;&#x8BA4;1&#x5929;</span>
-    <span class="hljs-attribute">autoblacklist_limit</span> <span class="hljs-number">30</span>;        <span class="hljs-comment">#&#x5BA2;&#x6237;&#x7AEF;&#x9650;&#x901F;&#x6307;&#x6807;&#xFF0C;&#x9ED8;&#x8BA4;&#x6BCF;&#x79D2;30&#x6B21;</span>
+                                <h1 id="&#x4F1A;&#x8BDD;">&#x4F1A;&#x8BDD;</h1>
+<p>v2.2&#x4EE5;&#x524D;&#x7684;&#x4F1A;&#x8BDD;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x88AB;&#x6682;&#x505C;&#x3002;&#x65B0;&#x7248;&#x4F1A;&#x8BDD;&#x53EF;&#x901A;&#x8FC7;cookie&#x673A;&#x5236;&#x5B8C;&#x6210;&#x3002;&#x4F8B;&#x5982;:</p>
+<pre><code class="lang-lua">
+<span class="hljs-keyword">local</span> m = {}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">m.handler</span><span class="hljs-params">(req, res)</span></span>
+    res:set_header(<span class="hljs-string">&apos;Content-Type&apos;</span>, <span class="hljs-string">&apos;text/plain;charset=UTF-8&apos;</span>)
+    <span class="hljs-keyword">local</span> c = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">if</span> req:has_cookie(<span class="hljs-string">&apos;test&apos;</span>) <span class="hljs-keyword">then</span>
+        c = <span class="hljs-built_in">tonumber</span>(req:get_cookie(<span class="hljs-string">&apos;test&apos;</span>)) + <span class="hljs-number">1</span>
+        res.content = <span class="hljs-built_in">tostring</span>(c)
+    <span class="hljs-keyword">else</span>
+        res.content = <span class="hljs-string">&apos;not found\n&apos;</span>
+    <span class="hljs-keyword">end</span>
+    res:set_cookie(<span class="hljs-string">&apos;test&apos;</span>, <span class="hljs-built_in">tostring</span>(c), <span class="hljs-string">&apos;Max-Age=300; Path=/; Domain=localhost&apos;</span>)
+    res.status = <span class="hljs-number">200</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">return</span> m
 </code></pre>
 
                                 
@@ -287,12 +298,12 @@
 
             
                 
-                <a href="api.html" class="navigation navigation-prev " aria-label="Previous page: 编程接口">
+                <a href="form.html" class="navigation navigation-prev " aria-label="Previous page: 表单">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="lru_cache.html" class="navigation navigation-next " aria-label="Next page: 缓存加速">
+                <a href="api.html" class="navigation navigation-next " aria-label="Next page: 编程接口">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -303,7 +314,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"安全","level":"1.8","depth":1,"next":{"title":"缓存加速","level":"1.9","depth":1,"path":"tutorail/lru_cache.md","ref":"tutorail/lru_cache.md","articles":[]},"previous":{"title":"编程接口","level":"1.7","depth":1,"path":"tutorail/api.md","ref":"tutorail/api.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/safe.md","mtime":"2022-01-03T03:14:53.946Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-07T01:33:49.332Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"会话","level":"1.6","depth":1,"next":{"title":"编程接口","level":"1.7","depth":1,"path":"tutorail/api.md","ref":"tutorail/api.md","articles":[]},"previous":{"title":"表单","level":"1.5","depth":1,"path":"tutorail/form.md","ref":"tutorail/form.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"tutorail/session.md","mtime":"2022-01-07T01:33:26.932Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-07T01:33:49.332Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
