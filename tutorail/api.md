@@ -50,6 +50,7 @@ java接口也非常简单，包括`String`,`HashMap<String, String>`和`HashMap<
 - set_header
 - set_session
 - set_cache
+- set_cookie
 
 
 # 附注
