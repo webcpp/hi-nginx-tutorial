@@ -55,13 +55,11 @@ java接口也非常简单，包括`String`,`HashMap<String, String>`和`HashMap<
 
 # 附注
 
-新版hi-nginx暂停了会话和缓存机制。请暂停以下6个方法的使用。
+新版hi-nginx暂停了会话和缓存机制。请暂停以下4个方法的使用。
 - has_session
-- has_cache
 - get_session
+- has_cache
 - get_cache
-- set_cache
-- set_session
 
 
 
