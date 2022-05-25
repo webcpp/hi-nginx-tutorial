@@ -61,7 +61,7 @@ yum install openssl-devel
 
 ```txt
 export JAVA_HOME=/usr/lib/jvm/default-java
-export CLASSPATH=/usr/local/nginx/app/java:/usr/local/nginx/app/java/hi-nginx-java.jar
+export CLASSPATH=/usr/local/nginx/app/java:/usr/local/nginx/app/java/config-1.4.2.jar:/usr/local/nginx/app/java/jmustache-1.15.jar:/usr/local/nginx/app/java/hi-nginx-java.jar
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
